@@ -1,5 +1,4 @@
-// mongodb-pass : I0ScVT9NuyU9NTqM
-//mongodb+srv://Tolulope:<password>@cluster0.iy6ag.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+//xOHc26PFp3qY0iQo
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -8,11 +7,11 @@ const mongoose = require('mongoose');
 
 const Post = require('./models/post')
 const postRoutes = require('./routes/posts')
-const userRoutes = require('./routes/users')
+const userRoutes = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://Tolulope:I0ScVT9NuyU9NTqM@cluster0.iy6ag.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect("mongodb+srv://Tolulope:7ZLOnkid8UlLbG9T@cluster0.iy6ag.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then(() => console.log('connected'))
     .catch((error) => {
         console.log('unable to connect');

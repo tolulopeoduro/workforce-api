@@ -7,10 +7,26 @@ exports.getAllPosts = (req , res , next) => {
         }
     ).catch(
         (error) => {
-            res.status(500).json({error : error })
+            res.status(500).json({
+                error : error
+            })
         }
     )
-    next()
+}
+
+
+exports.getUserPosts = (req , res , next) => {
+    Post.find({userId : req.params.id}).then(
+        (posts) => {
+            res.status(200).json(posts)
+        }
+    ).catch(
+        (error) => {
+            res.status(500).json({
+                error : error
+            })
+        }
+    )
 }
 
 exports.getSinglePost = (req , res , next) => {
@@ -23,13 +39,13 @@ exports.getSinglePost = (req , res , next) => {
             res.status(404).json({error : error})
         }
     )
-    next()
 }
 
 exports.createPost = (req , res , next) => {
     const post = new Post({
         title : req.body.title,
         content: req.body.content,
+        author : req.body.author,
         release_time : req.body.release_time,
         userId : req.body.userId
     });
@@ -44,7 +60,6 @@ exports.createPost = (req , res , next) => {
             })
         }
     )
-    next()
 }
 
 exports.editPost = (req , res , next) => {
@@ -53,6 +68,7 @@ exports.editPost = (req , res , next) => {
         title : req.body.title,
         content: req.body.content,
         release_time : req.body.release_time,
+        author : req.body.author,
         userId : req.body.userId
     })
     Post.updateOne({ _id : req.params.id} , post).then(
@@ -64,10 +80,10 @@ exports.editPost = (req , res , next) => {
             res.status(400).json({error : error})
         }
     )
-    next()
 }
 
 exports.deletePost = (req , res , next) => {
+    console.log(req.body)
     Post.deleteOne({_id : req.params.id}).then(
         () => {
             res.status(200).json({message : "Deleted successfully "})
@@ -77,5 +93,4 @@ exports.deletePost = (req , res , next) => {
             res.status(400).json({error : error})
         }
     )
-    next()
 }
